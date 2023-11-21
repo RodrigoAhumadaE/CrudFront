@@ -1,0 +1,16 @@
+:root {
+  --primero: #252525;
+  --segundo: #454545;
+  --tercero: #656565;
+  --cuarto: #858585;
+  --quinto: #a5a5a5;
+  --fondo: #c5c5c5;
+  --textoClaro: #e5e5e5;
+  --textoOscuro: #353535;
+  --boton: gold;
+  --botonHover: #8e7800;
+  --alert: #ffff00;
+  --alertHover: #9a9a00;
+  --warning: #c80000;
+  --warningHover: #820000;
+}

@@ -1,0 +1,22 @@
+.delete {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  background-color: var(--tercero);
+  color: var(--textoClaro);
+  margin: 5% auto;
+  padding: 3%;
+  border-radius: 25px;
+}
+
+.consulta {
+  font-size: 1em;
+  margin: 3% 0;
+  text-align: center;  
+}
+
+.datos {
+  font-size: 0.8em;
+  margin: 3% 0;
+}

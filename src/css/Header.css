@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--primero);
+  padding: 1% 1%;
+}
+
+button {
+  background-color: var(--boton);
+  color: var(--textoOscuro);
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.icono {
+  width: 20%;
+  display: flex;
+  justify-content: left;
+}
+
+.icono h2{
+  width: 100px;
+  text-align: center;
+  background-color: var(--segundo);
+  color: var(--textoClaro);
+  border-radius: 15px;
+  padding-top: 2px;
+}
+
+.buscador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+}
+
+.buscador input{
+  width: 60%;
+  background-color: var(--fondo);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.agregar {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.buscador .buscar, .agregar .add, .back {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding-top: 3px;
+}
+
+.buscar:hover, .add:hover, .back:hover {
+  background-color: var(--botonHover);
+  color: var(--textoClaro);
+}
+
+.volver {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}

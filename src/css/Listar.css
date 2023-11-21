@@ -1,0 +1,52 @@
+.tabla {
+  width: 100%;
+  background-color: var(--segundo);
+  padding: 1%;
+}
+
+.fila {
+  background-color: var(--tercero);
+  color: var(--textoClaro);
+}
+
+.fila td {
+  background-color: var(--cuarto);
+  color: var(--textoOscuro);
+  margin-left: 5px;
+  padding: 2px 0;
+  text-align: center;
+}
+
+.fila th {
+  padding: 4px 0;
+  font-size: 1.2em;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 2px;
+  padding-top: 3px;
+}
+
+.editar{  
+  background-color: var(--alert);
+  color: var(--textoOscuro);
+  transition: all 300ms;
+}
+
+.editar:hover {
+  background-color: var(--alertHover);
+}
+
+.eliminar {
+  background-color: var(--warning);
+  color: var(--textoClaro);
+  transition: all 300ms;
+}
+
+.eliminar:hover {
+  background-color: var(--warningHover);
+}
