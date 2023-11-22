@@ -74,7 +74,7 @@ export default function Actualizar({userid}) {
           </div>
           <div className="item">
             <label htmlFor="rut">RUT: </label>
-            <input type="text" name="rut" onChange={handleChange} value={userFound.rut} minLength="10" placeholder="12345678-9" required />
+            <input type="text" name="rut" onChange={handleChange} value={userFound.rut} minLength="10" placeholder="12345678-9" is="input-rut" required />
           </div>
           <div className="item">
             <label htmlFor="nombre">Nombre: </label>

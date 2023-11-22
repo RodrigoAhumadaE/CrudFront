@@ -10,6 +10,6 @@ export default function ActualizarPage() {
     <div className="content">
       <HeaderII />
       <Actualizar userid = {idUser} />
-    </div>
+    </div>    
   )
 }

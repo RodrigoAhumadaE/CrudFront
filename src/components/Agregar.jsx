@@ -61,7 +61,7 @@ export default function Agregar() {
         <div className="formulario">
           <div className="item">
             <label htmlFor="rut">RUT: </label>
-            <input type="text" name="rut" id="rut" onChange={handleChange} value={usuario.rut} required minLength="10" placeholder="12345678-9" />
+            <input type="text" name="rut" id="rut" onChange={handleChange} value={usuario.rut} required minLength="10" placeholder="12345678-9" is="input-rut" />
           </div>
           <div className="item">
             <label htmlFor="nombre">Nombre: </label>
