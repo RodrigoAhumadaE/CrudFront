@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { formatRut } from "./utils/formatRut";
 import "../css/Agregar.css";
 import URLBase from "../Constantes";
 import axios from 'axios';
@@ -60,23 +61,23 @@ export default function Agregar() {
         <div className="formulario">
           <div className="item">
             <label htmlFor="rut">RUT: </label>
-            <input type="text" name="rut" id="rut" onChange={handleChange} value={usuario.rut} />
+            <input type="text" name="rut" id="rut" onChange={handleChange} value={usuario.rut} required minLength="10" placeholder="12345678-9" />
           </div>
           <div className="item">
             <label htmlFor="nombre">Nombre: </label>
-            <input type="text" name="nombre" id="nombre" onChange={handleChange} value={usuario.nombre} />
+            <input type="text" name="nombre" id="nombre" onChange={handleChange} value={usuario.nombre} required />
           </div>
           <div className="item">
             <label htmlFor="apellido">Apellido: </label>
-            <input type="text" name="apellido" id="apellido" onChange={handleChange} value={usuario.apPaterno} />
+            <input type="text" name="apellido" id="apellido" onChange={handleChange} value={usuario.apPaterno} required />
           </div>
           <div className="item">
             <label htmlFor="telefono">Teléfono: </label>
-            <input type="number" name="telefono" id="telefono" onChange={handleChange} value={usuario.fono} />
+            <input type="text" name="telefono" id="telefono" onChange={handleChange} value={usuario.fono} pattern="^[0-9]{9}$" required />
           </div>
           <div className="item">
             <label htmlFor="correo">Correo: </label>
-            <input type="email" name="correo" id="correo" onChange={handleChange} value={usuario.mail} />
+            <input type="email" name="correo" id="correo" onChange={handleChange} value={usuario.mail} required />
           </div>
         </div>        
         <div className="botones">

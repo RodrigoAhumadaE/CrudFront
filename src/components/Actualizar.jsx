@@ -74,23 +74,23 @@ export default function Actualizar({userid}) {
           </div>
           <div className="item">
             <label htmlFor="rut">RUT: </label>
-            <input type="text" name="rut" onChange={handleChange} value={userFound.rut} />
+            <input type="text" name="rut" onChange={handleChange} value={userFound.rut} minLength="10" placeholder="12345678-9" required />
           </div>
           <div className="item">
             <label htmlFor="nombre">Nombre: </label>
-            <input type="text" name="nombre" onChange={handleChange} value={userFound.nombre} />
+            <input type="text" name="nombre" onChange={handleChange} value={userFound.nombre} required />
           </div>
           <div className="item">
             <label htmlFor="apellido">Apellido: </label>
-            <input type="text" name="apellido" onChange={handleChange} value={userFound.apellido} />
+            <input type="text" name="apellido" onChange={handleChange} value={userFound.apellido} required />
           </div>
           <div className="item">
             <label htmlFor="telefono">Teléfono: </label>
-            <input type="number" name="telefono" onChange={handleChange} value={userFound.telefono} />
+            <input type="number" name="telefono" onChange={handleChange} value={userFound.telefono} pattern="^[0-9]{9}$" required />
           </div>
           <div className="item">
             <label htmlFor="correo">Correo: </label>
-            <input type="email" name="correo" onChange={handleChange} value={userFound.correo} />
+            <input type="email" name="correo" onChange={handleChange} value={userFound.correo} required />
           </div>
         </div>        
         <div className="botones">
