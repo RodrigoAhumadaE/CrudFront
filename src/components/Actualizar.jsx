@@ -1,73 +1,77 @@
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import URLBase from "../Constantes";
+import axios from 'axios';
+import '../css/Actualizar.css';
 
-export default function Actualizar() {
+export default function Actualizar({userid}) {
 
   const [userFound, setUserFound] = useState({
+    usuarioId: userid,
     rut: "",
     nombre: "",
     apellido: "",
-    telefono:0,
+    telefono: 0,
     correo: ""
   });
-  let userid = sessionStorage.getItem('idUsuario');
 
   const navigate = useNavigate();
 
+  // funcion para obtener el usuario a editar
   const getUsuario = async () => {
-    const urlGetUser = `${URLBase}api/usuario/${userid}`;
+    const urlGetUser = `${URLBase}api/usuario/${userid}`;  
     try {
-      const responseGetUser = await fetch(urlGetUser);
-      const responseGetUserJSON = await responseGetUser.json();
+      const responseGetUser = await axios.get(urlGetUser);
+      const responseGetUserJSON = await responseGetUser.data;
       setUserFound(responseGetUserJSON);
     } catch (error) {
       console.log(error);
     }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const urlUpUser = `http://localhost:8000/user/${userid}`;
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(userFound),
-    };
+  };
+  
+  // funcion para actualizar el usuario
+  const handleUpdateUser = async (usuario) => {
     try {
-      const updateUser = await fetch(urlUpUser, requestOptions);
-      const updateUserJSON = await updateUser.json();
-      const data = await updateUserJSON.mensaje;
-      console.log(data);
-      setTimeout(() => navigate(-1), 1000);
-    } catch (error){
-      console.log(error);
+      const response = await axios.put(`${URLBase}api/usuario/actualizar`, usuario);
+      if (response.status === 200) {
+        alert('Usuario actualizado exitosamente');
+        navigate(-1);
+      } else {
+        alert('Error al actualizar el usuario');
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
+  // funcion para ejecutar la funcion de actualizar usuario cuando se envie el formulario
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await handleUpdateUser(userFound);
+  };
+
+  
   useEffect(() => {
     getUsuario();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // funcion que actualiza el estado userFound cada vez que se modifica un valor en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserFound((prevState) => ({...prevState, [name]: value}));
   }
 
-  const cerrarModal = () => {
-    let elementModalAdd = document.querySelector('.modal-edit');
-    elementModalAdd.classList.remove('mostrar');
-    let elementContainer = document.querySelector('.content');
-    elementContainer.classList.remove('desenfocar');
-  }
-
   return(
     <div className="form-edit">
       <form onSubmit={handleSubmit}>
-        <h2 className="titulo-form">Formulario Agregar</h2>
+        <h2 className="titulo-form">Formulario Editar</h2>
         <div className="formulario">
+        <div className="item">
+            <label htmlFor="usuarioId">ID: </label>
+            <input type="text" name="usuarioId" disabled value={userFound.usuarioId} />
+          </div>
           <div className="item">
             <label htmlFor="rut">RUT: </label>
             <input type="text" name="rut" onChange={handleChange} value={userFound.rut} />
@@ -90,11 +94,8 @@ export default function Actualizar() {
           </div>
         </div>        
         <div className="botones">
-          <button type="submit" className="btn-accion editar">
+          <button type="submit" className="btn editar">
             Actualizar
-          </button>
-          <button type="button" className="btn-accion cancelar" onClick={cerrarModal}>
-            Cancelar
           </button>
         </div>
       </form>
@@ -102,6 +103,7 @@ export default function Actualizar() {
   )
 }
 
-// Actualizar.propTypes = {
-//   userid: PropTypes.number.isRequired,
-// };
+// validacion del argumento enviado al componente
+Actualizar.propTypes = {
+  userid: PropTypes.number.isRequired,
+};

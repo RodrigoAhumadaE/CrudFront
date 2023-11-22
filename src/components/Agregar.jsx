@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../css/Agregar.css";
 import URLBase from "../Constantes";
 import axios from 'axios';
-// import { useNavigate } from "react-router-dom";
 
 export default function Agregar() {
 
@@ -14,32 +13,7 @@ export default function Agregar() {
     correo: ""
   });
 
-  // const navigate = useNavigate();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // const urlSetUser = 'http://localhost:8000/user/';
-  //   const urlSetUser = `${URLBase}usuario/agregar`;
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify(usuario),
-  //   };
-  //   try {
-  //     const createUser = await fetch(urlSetUser, requestOptions);
-  //     const createUserJSON = await createUser.json();
-  //     const data = await createUserJSON.mensaje;
-  //     console.log(data);
-  //     setTimeout(function () {
-  //       location.reload();
-  //     }, 1000); 
-  //   } catch (error){
-  //     console.log(error);
-  //   }
-  // };
-
-  
-  
+  // funcion para crear el usuario 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,20 +21,25 @@ export default function Agregar() {
       cerrarModal();
       alert('Usuario creado exitosamente');
       location.reload();
-      setUsuario({
-        rut: '',
-        nombre: '',
-        apellido: '',
-        telefono: 0,
-        correo: '',
-      });
+      resetState();
     } catch (error) {
       console.error(error);
       alert('Error al crear usuario');
     }
   };
-  
 
+  // funcion para limpiar los datos del estado userFound
+  const resetState = () => {
+    setUsuario({
+      rut: '',
+      nombre: '',
+      apellido: '',
+      telefono: 0,
+      correo: '',
+    });
+  };
+  
+  // funcion que actualiza el estado userFound cada vez que se modifica un valor en el formulario 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUsuario((prevState) => ({...prevState, [name]: value}));
@@ -71,6 +50,7 @@ export default function Agregar() {
     elementModalAdd.classList.remove('mostrar');
     let elementContainer = document.querySelector('.content');
     elementContainer.classList.remove('desenfocar');
+    resetState();
   }
 
   return(

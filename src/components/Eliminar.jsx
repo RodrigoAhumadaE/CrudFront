@@ -1,60 +1,46 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import URLBase from "../Constantes";
+import axios from "axios";
 import "../css/Eliminar.css";
 
 export default function Eliminar({userid}) {
 
-  const idUser = {
-    id: userid
-  }
-
   const [userFound, setUserFound] = useState({});
 
+  // funcion para obtener el usuario a eliminar
   const getUsuario = async () => {
-    const urlGetUser = "http://localhost:8000/user/get_user";
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(idUser),
-    };
+    const urlGetUser = `${URLBase}api/usuario/${userid}`;
     try {
-      const responseGetUser = await fetch(urlGetUser, requestOptions);
-      const responseGetUserJSON = await responseGetUser.json();
-      const data = await responseGetUserJSON;
-      setUserFound(data);
+      const responseGetUser = await axios.get(urlGetUser);
+      const responseGetUserJSON = await responseGetUser.data;
+      setUserFound(responseGetUserJSON);
     } catch (error) {
       console.log(error);
     }
   }
 
-  const delUsuario = async () => {
-    const urlDelUser = "http://localhost:8000/user";
-    const requestOptionsDel = {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(idUser),
-    };
+  const handleDeleteUser = async () => {
+    const urlDelUser = `${URLBase}api/usuario/eliminar/${userid}`;
     try {
-      const responseDelUser = await fetch(urlDelUser, requestOptionsDel);
-      const responseDelUserJSON = await responseDelUser.json();
-      const dataDel = await responseDelUserJSON;
-      console.log(dataDel);
-      setTimeout(() => window.location.href = "/", 1000)      
+      const responseDelUser = await axios.delete(urlDelUser);
+      if(responseDelUser.status === 200){
+        alert("Usuario eliminado correctamente");
+        volver();
+      }else{
+        console.log("Error al eliminar el usuario");
+      }      
     } catch (error) {
       console.log(error);
     }
   }
 
-
+  const volver = () => window.history.back();
   
   useEffect(() => {
     getUsuario();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(idUser);
-  console.log(userFound);
-
 
   return(
     <div className="delete">
@@ -63,13 +49,21 @@ export default function Eliminar({userid}) {
       </div>     
       <div className="datos">
         <h3>Rut: {userFound.rut}</h3>
-        <h3>Nombre: {userFound.nombre} {userFound.apPaterno} {userFound.apMaterno}</h3>
+        <h3>Nombre: {userFound.nombre} {userFound.apellido}</h3>
       </div>
-      <button className="btn-accion eliminar" onClick={delUsuario}>Eliminar</button>
+      <div className="botones">
+          <button type="submit" className="btn-accion eliminar" onClick={handleDeleteUser}>
+            Eliminar
+          </button>
+          <button type="button" className="btn-accion cancelar" onClick={volver}>
+            Cancelar
+          </button>
+        </div>
     </div>
   )
 }
 
+// validacion del argumento enviado al componente
 Eliminar.propTypes = {
   userid: PropTypes.number.isRequired,
 };

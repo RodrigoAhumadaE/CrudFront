@@ -1,4 +1,4 @@
-.form-add, .form-edit {
+.form-add {
   width: 93%;
   display: flex;
   flex-direction: column;
@@ -48,6 +48,7 @@
 }
 
 .botones {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -80,7 +81,7 @@
   color: var(--textoClaro);
 }
 
-.modal-add, .modal-edit {
+.modal-add {
   display: none;
   width: 60%;
   position: fixed;
